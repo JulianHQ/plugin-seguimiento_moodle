@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/seguimiento/db" VERSION="2018010100" COMMENT="XMLDB file for Moodle mod/seguimiento"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+
+    <!--Tabla de instancias creadas: seguimiento-->
+    <TABLE NAME="seguimiento" COMMENT="Default comment for seguimiento, please edit me">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course seguimiento activity belongs to"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" COMMENT="name field for moodle instances"/>
+        <FIELD NAME="mensaje" TYPE="text" NOTNULL="true" SEQUENCE="false" COMMENT="General introduction of the seguimiento activity"/>
+        <FIELD NAME="minscore" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Minimum score possible"/>
+        <FIELD NAME="maxscore" TYPE="int" LENGTH="3" NOTNULL="true" UNSIGNED="true" DEFAULT="100" SEQUENCE="false" COMMENT="Maximum score possible"/>
+        <FIELD NAME="introformat" TYPE="int" LENGTH="4" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+
+    <!--Tabla de configuración de alertas de productos (depende de cada curso): seguimiento_config_productos-->
+    <TABLE NAME="seguimiento_config_productos" COMMENT="Default comment for seguimiento, please edit me">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="5" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+        <FIELD NAME="course_context" TYPE="int" LENGTH="5" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Almacenamiento de la configuración de alertas por no entrega y no calificación/retroalimentación de productos."/>
+        <FIELD NAME="course_instance" TYPE="int" LENGTH="5" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Almacenamiento de la configuración de alertas por no entrega y no calificación/retroalimentación de productos."/>
+        <FIELD NAME="e_riesgo_umbral" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="e_productos_umbral1" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="e_productos_umbral2" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="e_productos_mensaje" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="d_productos_umbral1" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="d_productos_umbral2" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="d_productos_mensaje" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course_context" UNIQUE="false" FIELDS="course_context"/>
+      </INDEXES>
+    </TABLE>
+
+    <!--Tabla de configuración de alertas de ingreso (depende del programa-categoría): seguimiento_config_ingresos-->
+    <TABLE NAME="seguimiento_config_ingresos" COMMENT="Default comment for seguimiento, please edit me">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="5" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+        <FIELD NAME="category" TYPE="int" LENGTH="5" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Almacenamiento de la configuración de alertas por no entrega y no calificación/retroalimentación de productos."/>
+        <FIELD NAME="e_ingresos_umbral1" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="e_ingresos_umbral2" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="e_ingresos_mensaje" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="d_ingresos_umbral1" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="d_ingresos_umbral2" TYPE="int" LENGTH="3" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="d_ingresos_mensaje" TYPE="text" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="category" UNIQUE="false" FIELDS="category"/>
+      </INDEXES>
+    </TABLE>
+
+    <!--Tabla de registro de alertas (registra las alertas enviadas): seguimiento_registro-->
+    <TABLE NAME="seguimiento_registro" COMMENT="Default comment for seguimiento, please edit me">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true"/>
+        <FIELD NAME="category" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="false" COMMENT="Course seguimiento activity belongs to"/>
+        <FIELD NAME="course" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false" COMMENT="Course seguimiento activity belongs to"/>
+        <FIELD NAME="id_destino" TYPE="int" LENGTH="4" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false" COMMENT="Format of the intro field (MOODLE, HTML, MARKDOWN...)"/>
+        <FIELD NAME="alerta_tipo" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" SEQUENCE="false"/>
+        <FIELD NAME="alerta_fecha" TYPE="int" LENGTH="10" NOTNULL="false" UNSIGNED="true" DEFAULT="0" SEQUENCE="false"/>
+        <FIELD NAME="alerta_mensaje" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="The maximum grade. Can be negative to indicate the use of a scale."/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="course" UNIQUE="false" FIELDS="course"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
+
+

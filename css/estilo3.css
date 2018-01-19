@@ -1,0 +1,87 @@
+#modal_config {
+  background: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  position: fixed;
+  top: -100vh;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  transition: all .5s;
+}
+
+#modal_config p {
+  position: relative;
+  top: 0;
+  left: 2px;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  font-size: 17px;
+  text-align: justify;
+  color: #fff;
+}
+
+#modal_config h4 {
+
+  color: #fff;
+}
+
+
+#modal_config div {
+  margin: 0 3% auto 3%;
+}
+
+#modal_config table {
+  width: 65%;
+  position: relative;
+  margin: auto;
+  text-align: left;
+  border: 1px solid #00000F;
+  color: #fff;
+}
+
+#mostrar-modal_config {
+  display: none;
+}
+
+#mostrar-modal_config + label {
+  background: steelblue;
+  display: table;
+  margin: 0 10px auto auto;
+  color: #fff;
+  line-height: 3;
+  padding: 0 1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+#mostrar-modal_config + label:hover {
+  background: #38678f;
+}
+
+#mostrar-modal_config:checked ~ #modal_config {
+  top: 0;
+}
+
+#cerrar-modal_config {
+  display: none;
+}
+
+#cerrar-modal_config + label {
+  position: absolute;
+  top: 4em;
+  right: 4em;
+  z-index: 100;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+  transition: all .5s;
+}
+
+
+
